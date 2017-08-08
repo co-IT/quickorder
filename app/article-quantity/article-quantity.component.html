@@ -1,0 +1,16 @@
+<ActionBar [title]="'Artikel: ' + article.customerArticleNumber ? article.customerArticleNumber : article.articleNumber" class="action-bar">
+        
+</ActionBar>
+<StackLayout  margin="35" >
+    <StackLayout horizontalAlignment="center" orientation="vertical" margin="30">
+        
+        <Label class="h2" text="Menge erfassen"></Label>
+    </StackLayout>
+        
+        <quantity-setter [article]="article"></quantity-setter>
+        <StackLayout orientation="vertical" marginTop="55">
+        <Button class="scan" style="width:400; height:100" nsRouterLink="/" clearHistory="true" text="Speichern" ></Button>
+        <Button (tap)="abort()" text="Abbrechen"></Button>
+        </StackLayout>
+</StackLayout>
+

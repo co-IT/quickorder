@@ -1,0 +1,22 @@
+<ActionBar title="Details" class="action-bar">
+</ActionBar>
+<StackLayout orientation="vertical">
+    <Image [src]="imageURL" ></Image>
+    <StackLayout margin="20">
+        <Label *ngIf="article.customerArticleNumber" [text]="'heco-Artikelnummer: '+ article.articleNumber"></Label>
+        <Label *ngIf="article.customerArticleNumber" [text]="'Artikelnummer: '+ article.customerArticleNumber"></Label>
+        <Label *ngIf="!article.customerArticleNumber" [text]="'Artikelnummer: '+ article.articleNumber"></Label>
+        <Label *ngIf="description && description !== ''" [text]="'Beschreibung: ' + description"></Label>
+        <StackLayout margin="30" orientation="vertical" horizontalAlignment="center">
+        <StackLayout horizontalAlignment="center" orientation="vertical">
+                <Label class="h3" text="Bestellmenge"></Label>
+        </StackLayout>
+        <quantity-setter [article]="article"></quantity-setter>
+        
+        </StackLayout>
+        <Button class="scan" style="height:80" (tap)="save()" text="Speichern & Zurück" ></Button>
+        <StackLayout marginTop="50">
+            <Button  (tap)="removeArticle(article)" text="Artikel löschen" ></Button>
+        </StackLayout>
+    </StackLayout>
+</StackLayout>

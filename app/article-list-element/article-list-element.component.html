@@ -1,0 +1,7 @@
+<DockLayout stretchLastChild="true" marginBottom= "5" marginTop="5">
+        <Button class="control" (tap)="removeArticle(article)" text="X" dock="right" marginRight="8"></Button>
+        <StackLayout class="listelement" orientation="vertical" dock="left" [nsRouterLink]="'/item/'+ article.articleID">
+                <Label  [text]="article.customerArticleNumber ? article.customerArticleNumber : article.articleNumber"></Label>
+                <Label  [text]="article.amount + ' ' + article.unit"></Label>
+        </StackLayout>
+</DockLayout >

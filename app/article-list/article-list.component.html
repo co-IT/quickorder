@@ -1,0 +1,27 @@
+<ActionBar title="heco Schnelle Bestellung" class="action-bar">
+        <NavigationButton text="go back" [nsRouterLink]="['/customer']" android.systemIcon = "ic_menu_friendslist"></NavigationButton>
+</ActionBar>
+
+<GridLayout  rows="2*,5*,*" class="page">
+        <Button class="scan" row="0" (tap)="scan()">
+                        <FormattedString verticalAlignment="center">
+                        <Span class="icon" text="&#xf02a; "></Span>
+                        <Span class="text" text=" ARTIKEL ERFASSEN"></Span>
+                        </FormattedString>
+        </Button>
+        
+        <ListView row="1" [items]="items" class="list-group">
+                
+                <ng-template let-item="item">
+                        <article-list-element [article]="item"></article-list-element>
+                </ng-template>
+        </ListView>
+        
+        <Button [isEnabled]="orderService.articles.length > 0" (tap)="confirmOrder()" class="order" row="2" text="Bestellung absenden">
+                        <FormattedString verticalAlignment="center">
+                                        <Span class="icon" text="&#xf291; "></Span>
+                                        <Span class="text" text=" Bestellung absenden"></Span>
+                                        </FormattedString>
+        </Button>
+        
+</GridLayout>

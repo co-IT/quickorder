@@ -1,0 +1,13 @@
+<ActionBar title="Kundendaten" class="action-bar">
+    <NavigationButton text="go back" [nsRouterLink]="['/']" android.systemIcon = "ic_menu_back"></NavigationButton>
+</ActionBar>
+<StackLayout orientation="vertical" horizontalAlign="center">
+<Label class="h2" text=" "></Label>
+<Label class="h3" text="Kundennummer"></Label>
+<TextField [(ngModel)]='customer.number'></TextField>
+<Label class="h3" text="Kundenname"></Label>
+<TextField [(ngModel)]='customer.name'></TextField>
+<Label class="h3" text="KundenID"></Label>
+<TextField [(ngModel)]='customer.id'></TextField>
+<Button (tap)="setCustomer()" class="control lg" text="Speichern"></Button>
+</StackLayout>

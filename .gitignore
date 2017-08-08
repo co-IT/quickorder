@@ -1,0 +1,7 @@
+/tmp
+/node_modules
+/platforms
+/report
+/app/**/*.js
+/app/environments/environment.prod.ts
+**/desktop.ini
