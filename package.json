@@ -15,7 +15,7 @@
     "@angular/compiler": "~4.1.0",
     "@angular/core": "~4.1.0",
     "@angular/forms": "~4.1.0",
-    "@angular/http": "~4.1.0",
+    "@angular/http": "^4.1.0",
     "@angular/platform-browser": "~4.1.0",
     "@angular/router": "~4.1.0",
     "nativescript-angular": "~3.1.0",
@@ -49,12 +49,12 @@
   },
   "scripts": {
     "ns-bundle": "ns-bundle",
-    "start-android-bundle": "npm run ns-bundle --android --run-app",
     "start-android-bundle:prod": "npm run ns-bundle --android --run-app --env.production",
+    "publish-ios-bundle": "npm run ns-bundle --ios --publish-app",
+    "generate-android-snapshot": "generate-android-snapshot --targetArchs arm,arm64,ia32 --install",
+    "start-android-bundle": "npm run ns-bundle --android --run-app",
     "start-ios-bundle": "npm run ns-bundle --ios --run-app",
     "build-android-bundle": "npm run ns-bundle --android --build-app",
-    "build-ios-bundle": "npm run ns-bundle --ios --build-app",
-    "publish-ios-bundle": "npm run ns-bundle --ios --publish-app",
-    "generate-android-snapshot": "generate-android-snapshot --targetArchs arm,arm64,ia32 --install"
+    "build-ios-bundle": "npm run ns-bundle --ios --build-app"
   }
 }
