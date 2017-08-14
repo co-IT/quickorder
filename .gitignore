@@ -4,4 +4,5 @@
 /report
 /app/**/*.js
 /app/environments/environment.prod.ts
+/app/environments/environment.ts
 **/desktop.ini
