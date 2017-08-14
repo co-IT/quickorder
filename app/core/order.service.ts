@@ -1,4 +1,4 @@
-import {Http} from '@angular/http';
+import {Http, Headers, URLSearchParams} from '@angular/http';
 import { Injectable } from "@angular/core";
 import { Article } from "../models/article";
 import { Customer } from "../models/customer";
@@ -16,12 +16,6 @@ export class OrderService {
     ];
 
     constructor(private http: Http){
-        this.articles = this.articles.map(a => {
-            a.increment = 10;
-            a.defaultAmount = 100;
-            a.amount = 100
-            return a;
-        } )
     }
 
     customerOrderNumber = '';
@@ -36,14 +30,56 @@ export class OrderService {
     }
 
     sendOrder(customer: Customer){
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+        const formatedOrder = this.formatOrder(customer);
         console.log(environment.sendmailURL)
-       return this.http.post(environment.sendmailURL,{
-        customer: customer,    
-        order: {
-                customerOrderNumber: this.customerOrderNumber,
-                articles: this.articles
-            }
-       })
+        const body = new URLSearchParams();
+        body.set('vorname', customer.name);
+        body.set('nachname', '');
+        body.set('sender', 'bestellApp@heco.de');
+        body.set('receiver', environment.receiver);
+        body.set('subject', 'Neue Bestellung per App');
+        body.set('body', formatedOrder);
+       return this.http.post(environment.sendmailURL,body.toString(),{headers: headers})
+    }
+
+    formatOrder(customer: Customer): string {
+        return `<html encoding="UTF-8"><p><b>Kunde:</b> ${customer.name}<br />
+        <p><b>Kundennummer:</b> ${customer.number}<br />
+        <p><b>KundenID:</b> ${customer.id}<br />
+        ${this.getCustomerOrderNumber(customer)}
+        <br />
+        ${this.iterateArticles()}
+        </html>
+        `
+    }
+
+    iterateArticles(): string{
+        let articlesTemplate = ''
+        this.articles.forEach(article => {
+            articlesTemplate += `<div style="width:100%; marin-bottom: 10px;">
+            <b>Artikel:</b> ${article.articleNumber} (ID: ${article.articleID})${this.getCustomerArticleNumber(article)}<br />
+            <b>Menge:</b> ${article.amount}<br /><br />
+            </div>`
+        })
+        return articlesTemplate;
+    }
+
+    getCustomerArticleNumber(article: Article): string {
+        if(article.customerArticleNumber){
+            return `
+            <br /><b>Fremdartikelnummer: </b>${article.customerArticleNumber}`;
+        } else 
+        return ``;
+    }
+
+    getCustomerOrderNumber(customer: Customer):string {
+        if(this.customerOrderNumber){
+            return `<p><b>Kunden-Bestellnummer:</b> ${this.customerOrderNumber}<br /><br />`;
+        } else 
+            return ``; 
     }
 
 }
